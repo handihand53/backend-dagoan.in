@@ -11,7 +11,8 @@ import java.util.UUID;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class MemberForm {
-    private UUID memberId;
+public class CommentForm {
+    private UUID commentId;
     private UUID userId;
+    private String comment;
 }

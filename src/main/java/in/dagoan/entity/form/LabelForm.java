@@ -11,7 +11,8 @@ import java.util.UUID;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class MemberForm {
-    private UUID memberId;
-    private UUID userId;
+public class LabelForm {
+    private UUID labelFormId;
+    private String labelName;
+    private String labelColor;
 }

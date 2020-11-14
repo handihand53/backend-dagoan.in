@@ -1,17 +1,15 @@
-package in.dagoan.entity.form;
+package in.dagoan.model.response.taskList;
 
+import in.dagoan.entity.document.Kanban;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.UUID;
-
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class MemberForm {
-    private UUID memberId;
-    private UUID userId;
+public class PostTaskListResponse {
+    private Kanban kanban;
 }

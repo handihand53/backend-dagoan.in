@@ -11,7 +11,6 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AssignTo {
-    private UUID id;
-    private String name;
-    private String userProfilePicture;
+    private UUID assignId;
+    private UUID userId;
 }
