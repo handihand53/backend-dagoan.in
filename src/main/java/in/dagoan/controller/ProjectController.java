@@ -5,7 +5,6 @@ import com.blibli.oss.common.response.Response;
 import com.blibli.oss.common.response.ResponseHelper;
 import in.dagoan.ApiPath;
 import in.dagoan.command.project.*;
-import in.dagoan.commandImpl.project.GetProjectWithUserIdCommandImpl;
 import in.dagoan.model.request.project.DeleteProjectRequest;
 import in.dagoan.model.request.project.GetProjectWithUserIdAndProjectIdRequest;
 import in.dagoan.model.request.project.PostProjectRequest;
@@ -32,22 +31,22 @@ public class ProjectController {
     }
 
     @GetMapping(value = ApiPath.PROJECT)
-    public Mono<Response<GetProjectWithUserIdResponse>> getProjectWithUserId(@RequestParam UUID userId) {
-        return commandExecutor.execute(GetProjectWithUserIdCommand.class, userId)
+    public Mono<Response<GetProjectWithProjectIdResponse>> getProjectWithProjectId(@RequestParam UUID projectId) {
+        return commandExecutor.execute(GetProjectWithProjectIdCommand.class, projectId)
                 .log("#getProjectWithUserId - Successfully executing command.")
                 .map(ResponseHelper::ok)
                 .subscribeOn(Schedulers.elastic());
     }
 
-    @GetMapping(value = ApiPath.PROJECT_DETAIL)
-    public Mono<Response<GetProjectWithUserIdAndProjectIdResponse>> getProjectWithUserIdAndProjectId(
-            @RequestBody GetProjectWithUserIdAndProjectIdRequest request
-    ) {
-        return commandExecutor.execute(GetProjectWithUserIdAndProjectIdCommand.class, request)
-                .log("#getProjectWithUserId - Successfully executing command.")
-                .map(ResponseHelper::ok)
-                .subscribeOn(Schedulers.elastic());
-    }
+//    @GetMapping(value = ApiPath.PROJECT_DETAIL)
+//    public Mono<Response<GetProjectWithUserIdAndProjectIdResponse>> getProjectWithUserIdAndProjectId(
+//            @RequestBody GetProjectWithUserIdAndProjectIdRequest request
+//    ) {
+//        return commandExecutor.execute(GetProjectWithUserIdAndProjectIdCommand.class, request)
+//                .log("#getProjectWithUserId - Successfully executing command.")
+//                .map(ResponseHelper::ok)
+//                .subscribeOn(Schedulers.elastic());
+//    }
 
     @PostMapping(value = ApiPath.PROJECT, consumes = MediaType.APPLICATION_JSON_VALUE)
     public Mono<Response<PostProjectResponse>> postNewProject(@RequestBody PostProjectRequest request) {

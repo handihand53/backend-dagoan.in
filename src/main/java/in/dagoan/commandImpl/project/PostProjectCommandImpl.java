@@ -31,9 +31,7 @@ public class PostProjectCommandImpl implements PostProjectCommand {
 
     @Override
     public Mono<PostProjectResponse> execute(PostProjectRequest request) {
-        return projectRepository.findFirstByUserId(request.getUserId())
-                .switchIfEmpty(createProject(request))
-                .map(project -> addProjectForm(project, request))
+        return createProject(request)
                 .flatMap(project -> projectRepository.save(project))
                 .map(this::toResponse);
     }
@@ -45,21 +43,6 @@ public class PostProjectCommandImpl implements PostProjectCommand {
     }
 
     private Project toProject(PostProjectRequest request) {
-        List<ProjectForm> projectForms = new ArrayList<>();
-        Project project = Project.builder()
-                .projectId(UUID.randomUUID())
-                .userId(request.getUserId())
-                .projects(projectForms)
-                .createdAt(LocalDateTime.now())
-                .build();
-        BeanUtils.copyProperties(request, project);
-        return project;
-    }
-
-    private Project addProjectForm(Project project, PostProjectRequest request) {
-        log.info("#PostProjectCommand - Create new project for user {} punten", request.getUserId());
-
-        List<ProjectForm> projectForms = project.getProjects();
         ProjectForm projectForm = ProjectForm.builder()
                 .projectId(UUID.randomUUID())
                 .projectName(request.getProjectName())
@@ -68,14 +51,22 @@ public class PostProjectCommandImpl implements PostProjectCommand {
                 .members(request.getMemberForm())
                 .createdAt(LocalDate.now())
                 .build();
-        projectForms.add(projectForm);
-        project.setProjects(projectForms);
+
+        Project project = Project.builder()
+                .projectId(UUID.randomUUID())
+                .userId(request.getUserId())
+                .projects(projectForm)
+                .createdAt(LocalDateTime.now())
+                .build();
+        BeanUtils.copyProperties(request, project);
         return project;
     }
 
     private PostProjectResponse toResponse(Project project) {
         PostProjectResponse response = new PostProjectResponse();
         BeanUtils.copyProperties(project, response);
+        response.setProjectForm(project.getProjects());
+        response.setLastUpdated(project.getCreatedAt());
         return response;
     }
 }

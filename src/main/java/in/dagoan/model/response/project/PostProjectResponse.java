@@ -17,6 +17,6 @@ import java.util.UUID;
 public class PostProjectResponse {
     private UUID projectId;
     private UUID userId;
-    private List<ProjectForm> listProjects;
+    private ProjectForm projectForm;
     private LocalDateTime lastUpdated;
 }

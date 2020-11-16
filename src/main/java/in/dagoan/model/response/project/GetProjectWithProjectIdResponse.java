@@ -14,8 +14,8 @@ import java.util.UUID;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class GetProjectWithUserIdResponse {
+public class GetProjectWithProjectIdResponse {
     private UUID projectId;
     private UUID userId;
-    private List<ProjectForm> projects;
+    private ProjectForm projects;
 }

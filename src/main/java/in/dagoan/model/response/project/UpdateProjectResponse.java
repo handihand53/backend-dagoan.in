@@ -13,5 +13,5 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UpdateProjectResponse {
-    private List<ProjectForm> projects;
+    private ProjectForm projects;
 }

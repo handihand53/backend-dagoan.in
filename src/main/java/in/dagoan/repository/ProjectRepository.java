@@ -11,4 +11,6 @@ import java.util.UUID;
 public interface ProjectRepository extends ReactiveMongoRepository<Project, UUID> {
     Mono<Project> findFirstByProjectId(UUID projectId);
     Mono<Project> findFirstByUserId(UUID id);
+    Mono<Project> findFirstByUserIdAndProjectId(UUID userId, UUID projectId);
+
 }

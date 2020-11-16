@@ -32,7 +32,7 @@ public class UpdateProjectCommandImpl implements UpdateProjectCommand {
 
     @Override
     public Mono<UpdateProjectResponse> execute(UpdateProjectRequest request) {
-        return projectRepository.findFirstByUserId(request.getUserId())
+        return projectRepository.findFirstByUserIdAndProjectId(request.getUserId(), request.getProjectId())
                 .switchIfEmpty(Mono.error(new NotFoundException("Project not found!")))
                 .map(project -> updateProjectForm(project, request))
                 .flatMap(project -> projectRepository.save(project))
@@ -41,24 +41,17 @@ public class UpdateProjectCommandImpl implements UpdateProjectCommand {
 
     private UpdateProjectResponse toResponse(Project project) {
         UpdateProjectResponse response = new UpdateProjectResponse();
-        BeanUtils.copyProperties(project, response);
+        response.setProjects(project.getProjects());
         return response;
     }
 
     private Project updateProjectForm(Project project, UpdateProjectRequest request) {
-        List<ProjectForm> projectForms = new ArrayList<>();
-        project.getProjects().forEach(projectForm ->
-                projectForms.add(checkAndUpdateProjectForm(projectForm, request)));
-        project.setProjects(projectForms);
+        ProjectForm projectForm = project.getProjects();
+        projectForm.setStatus(request.getProjectStatus());
+        projectForm.setProjectName(request.getProjectName());
+        projectForm.setDescription(request.getDescription());
+        project.setProjects(projectForm);
         return project;
     }
 
-    private ProjectForm checkAndUpdateProjectForm(ProjectForm projectForm, UpdateProjectRequest request) {
-        if (projectForm.getProjectId().equals(request.getProjectId())) {
-            projectForm.setStatus(request.getProjectStatus());
-            projectForm.setProjectName(request.getProjectName());
-            projectForm.setDescription(request.getDescription());
-        }
-        return projectForm;
-    }
 }

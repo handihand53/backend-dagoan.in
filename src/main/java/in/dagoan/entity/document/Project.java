@@ -34,7 +34,7 @@ public class Project {
     private UUID userId;
 
     @Field(value = PROJECTS)
-    private List<ProjectForm> projects;
+    private ProjectForm projects;
 
     @Field(value = CREATED_AT)
     private LocalDateTime createdAt;
