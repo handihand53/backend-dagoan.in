@@ -27,7 +27,7 @@ public class GetTaskListCommandImpl implements GetTaskListCommand {
 
     @Override
     public Mono<GetTaskListResponse> execute(GetTaskListRequest request) {
-        return kanbanRepository.findFirstByUserIdAndProjectId(request.getUserId(), request.getProjectId())
+        return kanbanRepository.findFirstByProjectId(request.getProjectId())
                 .switchIfEmpty(Mono.error(new NotFoundException("Kanban not found!")))
                 .map(kanban -> toResponse(kanban, request));
     }

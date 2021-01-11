@@ -1,4 +1,4 @@
-package in.dagoan.model.request.kanban;
+package in.dagoan.model.request.comment;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,10 +12,19 @@ import java.util.UUID;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class GetKanbanWithProjectIdRequest {
+public class AddCommentRequest {
     @NotNull
     private UUID userId;
 
     @NotNull
     private UUID projectId;
+
+    @NotNull
+    private UUID kanbanId;
+
+    @NotNull
+    private UUID taskListId;
+
+    @NotNull
+    private String comment;
 }

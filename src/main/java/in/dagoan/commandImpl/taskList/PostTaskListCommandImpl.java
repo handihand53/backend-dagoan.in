@@ -2,11 +2,13 @@ package in.dagoan.commandImpl.taskList;
 
 import in.dagoan.command.taskList.PostTaskListCommand;
 import in.dagoan.entity.document.Kanban;
+import in.dagoan.entity.form.CommentForm;
 import in.dagoan.entity.form.KanbanForm;
 import in.dagoan.entity.form.TaskList;
 import in.dagoan.model.request.taskList.PostTaskListRequest;
 import in.dagoan.model.response.taskList.PostTaskListResponse;
 import in.dagoan.repository.KanbanRepository;
+import in.dagoan.util.FileUploadUtil;
 import javassist.NotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +25,7 @@ public class PostTaskListCommandImpl implements PostTaskListCommand {
     private KanbanRepository kanbanRepository;
 
     @Autowired
-    public PostTaskListCommandImpl(KanbanRepository kanbanRepository) {
+    public PostTaskListCommandImpl(KanbanRepository kanbanRepository, FileUploadUtil fileUploadUtil) {
         this.kanbanRepository = kanbanRepository;
     }
 
@@ -46,8 +48,10 @@ public class PostTaskListCommandImpl implements PostTaskListCommand {
 
     private KanbanForm checkAndUpdateTaskListKanbanForm(KanbanForm kanbanForm, PostTaskListRequest request) {
         if (kanbanForm.getKanbanId().equals(request.getKanbanId())) {
+            List<CommentForm> commentFormList = new ArrayList<>();
             List<TaskList> taskLists = kanbanForm.getTaskLists();
             request.getTaskList().setTaskId(UUID.randomUUID());
+            request.getTaskList().setCommentForms(commentFormList);
             taskLists.add(request.getTaskList());
             kanbanForm.setTaskLists(taskLists);
         }

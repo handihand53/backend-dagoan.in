@@ -32,7 +32,7 @@ public class UpdateKanbanWithProjectIdCommandImpl implements UpdateKanbanWithPro
     }
     @Override
     public Mono<UpdateKanbanWithProjectIdResponse> execute(UpdateKanbanWithProjectIdRequest request) {
-        return kanbanRepository.findFirstByUserIdAndProjectId(request.getUserId(), request.getProjectId())
+        return kanbanRepository.findFirstByProjectId(request.getProjectId())
                 .switchIfEmpty(Mono.error(new NotFoundException("Kanban not found!")))
                 .map(kanban -> updateKanbanForm(kanban, request))
                 .flatMap(kanban -> kanbanRepository.save(kanban))

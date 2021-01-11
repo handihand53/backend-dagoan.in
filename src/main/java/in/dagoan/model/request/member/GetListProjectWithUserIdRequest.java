@@ -1,4 +1,4 @@
-package in.dagoan.model.request.kanban;
+package in.dagoan.model.request.member;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,10 +12,7 @@ import java.util.UUID;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class GetKanbanWithProjectIdRequest {
+public class GetListProjectWithUserIdRequest {
     @NotNull
     private UUID userId;
-
-    @NotNull
-    private UUID projectId;
 }

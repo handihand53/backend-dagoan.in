@@ -1,5 +1,7 @@
 package in.dagoan;
 
+import in.dagoan.entity.document.Member;
+
 public class ApiPath {
     // SOME FIXED VARIABLES
     private static final String API = "/api";
@@ -25,6 +27,7 @@ public class ApiPath {
     public static final String TASKLIST = API + "/taskList";
     public static final String TASKLIST_POST = TASKLIST + "/add";
     public static final String TASKLIST_UPDATE = TASKLIST + "/update";
+    public static final String TASKLIST_UPDATE_SECTION = TASKLIST + "/update-section";
     public static final String TASKLIST_DELETE = TASKLIST + "/delete";
 
     // LABEL ENDPOINTS
@@ -33,4 +36,14 @@ public class ApiPath {
     public static final String LABEL_UPDATE = LABEL + "/update";
     public static final String LABEL_DELETE = LABEL + "/delete";
 
+    // MEMBER ENDPOINTS
+    public static final String MEMBER = API + "/member";
+    public static final String MEMBER_POST = MEMBER + "/add";
+    public static final String MEMBER_DELETE = MEMBER + "/delete";
+
+    // COMMENT ENDPOINTS
+    public static final String COMMENT = API + "/comment";
+    public static final String COMMENT_POST = COMMENT + "/add";
+    public static final String COMMENT_PUT = COMMENT + "/put";
+    public static final String COMMENT_DELETE = COMMENT + "/delete";
 }

@@ -4,18 +4,9 @@ import com.blibli.oss.command.CommandExecutor;
 import com.blibli.oss.common.response.Response;
 import com.blibli.oss.common.response.ResponseHelper;
 import in.dagoan.ApiPath;
-import in.dagoan.command.taskList.DeleteTaskListCommand;
-import in.dagoan.command.taskList.GetTaskListCommand;
-import in.dagoan.command.taskList.PostTaskListCommand;
-import in.dagoan.command.taskList.UpdateTaskListCommand;
-import in.dagoan.model.request.taskList.DeleteTaskListRequest;
-import in.dagoan.model.request.taskList.GetTaskListRequest;
-import in.dagoan.model.request.taskList.PostTaskListRequest;
-import in.dagoan.model.request.taskList.UpdateTaskListRequest;
-import in.dagoan.model.response.taskList.DeleteTaskListResponse;
-import in.dagoan.model.response.taskList.GetTaskListResponse;
-import in.dagoan.model.response.taskList.PostTaskListResponse;
-import in.dagoan.model.response.taskList.UpdateTaskListResponse;
+import in.dagoan.command.taskList.*;
+import in.dagoan.model.request.taskList.*;
+import in.dagoan.model.response.taskList.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -54,6 +45,14 @@ public class TaskListController {
     public Mono<Response<UpdateTaskListResponse>> updateTaskListKanbanByProjectId(@RequestBody UpdateTaskListRequest request) {
         return commandExecutor.execute(UpdateTaskListCommand.class, request)
                 .log("#updateTaskListKanban - Successfully executing command.")
+                .map(ResponseHelper::ok)
+                .subscribeOn(Schedulers.elastic());
+    }
+
+    @PutMapping(value = ApiPath.TASKLIST_UPDATE_SECTION)
+    public Mono<Response<UpdateTaskListSectionResponse>> updateTaskListKanbanByProjectId(@RequestBody UpdateTaskListSectionRequest request) {
+        return commandExecutor.execute(UpdateTaskListSectionCommand.class, request)
+                .log("#updateTaskListSectionKanban - Successfully executing command.")
                 .map(ResponseHelper::ok)
                 .subscribeOn(Schedulers.elastic());
     }

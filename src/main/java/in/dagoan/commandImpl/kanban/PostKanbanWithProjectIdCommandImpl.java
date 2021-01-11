@@ -33,7 +33,7 @@ public class PostKanbanWithProjectIdCommandImpl implements PostKanbanWithProject
 
     @Override
     public Mono<PostKanbanWithProjectIdResponse> execute(PostKanbanWithProjectIdRequest request) {
-        return kanbanRepository.findFirstByUserIdAndProjectId(request.getUserId(), request.getProjectId())
+        return kanbanRepository.findFirstByProjectId(request.getProjectId())
                 .switchIfEmpty(Mono.error(new NotFoundException("Kanban not found!")))
                 .map(kanban -> addNewKanban(kanban, request))
                 .flatMap(kanban -> kanbanRepository.save(kanban))

@@ -31,7 +31,7 @@ public class GetKanbanWithProjectIdCommandImpl implements GetKanbanWithProjectId
 
     @Override
     public Mono<GetKanbanWithProjectIdResponse> execute(GetKanbanWithProjectIdRequest request) {
-        return kanbanRepository.findFirstByUserIdAndProjectId(request.getUserId(), request.getProjectId())
+        return kanbanRepository.findFirstByProjectId(request.getProjectId())
                 .switchIfEmpty(createKanban(request))
                 .flatMap(kanban -> kanbanRepository.save(kanban))
                 .map(this::toResponse);
