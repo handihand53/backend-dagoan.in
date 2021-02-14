@@ -5,9 +5,11 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 import java.util.UUID;
 
 @Data
@@ -15,15 +17,9 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PostTaskListRequest {
-    @NotNull
     private UUID userId;
-
-    @NotNull
     private UUID projectId;
-
-    @NotNull
     private UUID kanbanId;
-
-    @NotNull
     private TaskList taskList;
+    private List<MultipartFile> images;
 }

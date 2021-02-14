@@ -15,4 +15,5 @@ public class CommentForm {
     private UUID commentId;
     private UUID userId;
     private String comment;
+    private String userName;
 }

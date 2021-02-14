@@ -34,6 +34,7 @@ public class GetProjectWithProjectIdCommandImpl implements GetProjectWithProject
     private GetProjectWithProjectIdResponse toResponse(Project project) {
         GetProjectWithProjectIdResponse response = new GetProjectWithProjectIdResponse();
         BeanUtils.copyProperties(project, response);
+        response.setChatForm(project.getChat());
         return response;
     }
 }

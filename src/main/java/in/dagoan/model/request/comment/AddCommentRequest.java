@@ -26,5 +26,8 @@ public class AddCommentRequest {
     private UUID taskListId;
 
     @NotNull
+    private String userName;
+
+    @NotNull
     private String comment;
 }

@@ -23,7 +23,7 @@ public class UpdateTaskListSectionCommandImpl implements UpdateTaskListSectionCo
 
     @Override
     public Mono<UpdateTaskListSectionResponse> execute(UpdateTaskListSectionRequest request) {
-        return kanbanRepository.findFirstByUserIdAndProjectId(request.getUserId(), request.getProjectId())
+        return kanbanRepository.findFirstByProjectId(request.getProjectId())
             .switchIfEmpty(Mono.error(new NotFoundException("Kanban not found!")))
             .map(kanban -> updateTaskList(kanban, request))
             .flatMap(kanban -> kanbanRepository.save(kanban))
@@ -54,6 +54,7 @@ public class UpdateTaskListSectionCommandImpl implements UpdateTaskListSectionCo
         kanbanForms.setTaskLists(request.getTaskLists());
         kanbanFormList.add(kanbanForms);
         kanban.setKanbanForms(kanbanFormList);
+
         return kanban;
     }
 }

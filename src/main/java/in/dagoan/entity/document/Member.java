@@ -21,6 +21,7 @@ public class Member {
     public static final String ID = "memberId";
     public static final String USER_ID = "userId";
     public static final String LIST_PROJECT = "listProject";
+    public static final String PENDING_PROJECT = "pendingProject";
 
     @Id
     @Field(value = ID)
@@ -31,4 +32,7 @@ public class Member {
 
     @Field(value = LIST_PROJECT)
     private List<UUID> listProjectId;
+
+    @Field(value = PENDING_PROJECT)
+    private List<UUID> pendingProjectId;
 }

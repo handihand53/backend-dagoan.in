@@ -13,4 +13,5 @@ import java.util.UUID;
 public class AssignTo {
     private UUID assignId;
     private UUID userId;
+    private String userName;
 }

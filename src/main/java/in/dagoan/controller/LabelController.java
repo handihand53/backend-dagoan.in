@@ -5,20 +5,11 @@ import com.blibli.oss.common.response.Response;
 import com.blibli.oss.common.response.ResponseHelper;
 import in.dagoan.ApiPath;
 import in.dagoan.command.kanban.GetKanbanWithProjectIdCommand;
-import in.dagoan.command.label.DeleteLabelCommand;
-import in.dagoan.command.label.GetLabelCommand;
-import in.dagoan.command.label.PostLabelCommand;
-import in.dagoan.command.label.UpdateLabelCommand;
+import in.dagoan.command.label.*;
 import in.dagoan.model.request.kanban.GetKanbanWithProjectIdRequest;
-import in.dagoan.model.request.label.DeleteLabelRequest;
-import in.dagoan.model.request.label.GetLabelRequest;
-import in.dagoan.model.request.label.PostLabelRequest;
-import in.dagoan.model.request.label.UpdateLabelRequest;
+import in.dagoan.model.request.label.*;
 import in.dagoan.model.response.kanban.GetKanbanWithProjectIdResponse;
-import in.dagoan.model.response.label.DeleteLabelResponse;
-import in.dagoan.model.response.label.GetLabelResponse;
-import in.dagoan.model.response.label.PostLabelResponse;
-import in.dagoan.model.response.label.UpdateLabelResponse;
+import in.dagoan.model.response.label.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -37,10 +28,18 @@ public class LabelController {
         this.commandExecutor = commandExecutor;
     }
 
-    @GetMapping(value = ApiPath.LABEL)
+    @PostMapping(value = ApiPath.LABEL)
     public Mono<Response<GetLabelResponse>> getLabelByProjectId(@RequestBody GetLabelRequest request) {
         return commandExecutor.execute(GetLabelCommand.class, request)
                 .log("#getLabel - Successfully executing command.")
+                .map(ResponseHelper::ok)
+                .subscribeOn(Schedulers.elastic());
+    }
+
+    @PostMapping(value = ApiPath.LABEL_DETAIL)
+    public Mono<Response<GetLabelColorResponse>> getLabelDetailByProjectId(@RequestBody GetLabelColorRequest request) {
+        return commandExecutor.execute(GetLabelColorCommand.class, request)
+                .log("#getLabelColor - Successfully executing command.")
                 .map(ResponseHelper::ok)
                 .subscribeOn(Schedulers.elastic());
     }

@@ -19,6 +19,7 @@ public class TaskList {
     private String taskEstimatedTime;
     private String taskTimeLeft;
     private Integer section;
+    private String description;
     private AssignTo assignTo;
     private List<String> imageList;
     private List<CommentForm> commentForms;

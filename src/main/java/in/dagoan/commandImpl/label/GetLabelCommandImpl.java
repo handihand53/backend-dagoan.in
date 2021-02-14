@@ -37,7 +37,7 @@ public class GetLabelCommandImpl implements GetLabelCommand {
 
     @Override
     public Mono<GetLabelResponse> execute(GetLabelRequest request) {
-        return labelRepository.findFirstByProjectIdAndUserId(request.getProjectId(), request.getUserId())
+        return labelRepository.findFirstByProjectId(request.getProjectId())
                 .switchIfEmpty(createLabel(request))
                 .flatMap(label -> labelRepository.save(label))
                 .map(this::toResponse);

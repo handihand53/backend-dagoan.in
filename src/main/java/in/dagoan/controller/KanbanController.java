@@ -28,7 +28,7 @@ public class KanbanController {
         this.commandExecutor = commandExecutor;
     }
 
-    @GetMapping(value = ApiPath.KANBAN)
+    @PostMapping(value = ApiPath.KANBAN)
     public Mono<Response<GetKanbanWithProjectIdResponse>> getKanbanByProjectId(@RequestBody GetKanbanWithProjectIdRequest request) {
         return commandExecutor.execute(GetKanbanWithProjectIdCommand.class, request)
                 .log("#getKanban - Successfully executing command.")

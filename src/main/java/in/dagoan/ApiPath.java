@@ -14,8 +14,11 @@ public class ApiPath {
     // PROJECT ENDPOINTS
     public static final String PROJECT = API + "/projects";
     public static final String PROJECT_DETAIL = PROJECT + "/detail";
+    public static final String PROJECT_CHAT = PROJECT + "/chat";
     public static final String PROJECT_UPDATE = PROJECT + "/update";
     public static final String PROJECT_DELETE = PROJECT + "/delete";
+    public static final String PROJECT_DELETE_MEMBER = PROJECT + "/delete_member";
+    public static final String PROJECT_UPDATE_MEMBER = PROJECT + "/update_member";
 
     // MAIN PROJECT ENDPOINTS
     public static final String KANBAN = API + "/kanbans";
@@ -28,10 +31,12 @@ public class ApiPath {
     public static final String TASKLIST_POST = TASKLIST + "/add";
     public static final String TASKLIST_UPDATE = TASKLIST + "/update";
     public static final String TASKLIST_UPDATE_SECTION = TASKLIST + "/update-section";
+    public static final String TASKLIST_UPDATE_ASSIGN_TO = TASKLIST + "/update-assign-to";
     public static final String TASKLIST_DELETE = TASKLIST + "/delete";
 
     // LABEL ENDPOINTS
     public static final String LABEL = API + "/label";
+    public static final String LABEL_DETAIL = API + "/labelDetail";
     public static final String LABEL_POST = LABEL + "/add";
     public static final String LABEL_UPDATE = LABEL + "/update";
     public static final String LABEL_DELETE = LABEL + "/delete";
@@ -46,4 +51,13 @@ public class ApiPath {
     public static final String COMMENT_POST = COMMENT + "/add";
     public static final String COMMENT_PUT = COMMENT + "/put";
     public static final String COMMENT_DELETE = COMMENT + "/delete";
+
+    // INVITED ENDPOINTS
+    public static final String INVITED = API + "/invited";
+    public static final String INVITED_POST = INVITED + "/add";
+    public static final String INVITED_DELETE = INVITED + "/delete";
+
+    // USER ENDPOINT
+    public static final String GETUSER = API + "/get-user";
+    public static final String GETUSERBYEMAIL = API + "/get-user-email";
 }

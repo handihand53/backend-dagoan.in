@@ -48,6 +48,7 @@ public class GetKanbanWithProjectIdCommandImpl implements GetKanbanWithProjectId
         KanbanForm kanbanForm = new KanbanForm();
         kanbanForm.setKanbanId(UUID.randomUUID());
         kanbanForm.setName("To Do");
+        kanbanForm.setSection(0);
         kanbanForm.setTaskLists(taskLists);
         kanbanForms.add(kanbanForm);
         Kanban kanban = Kanban.builder()

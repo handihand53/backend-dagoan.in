@@ -45,6 +45,7 @@ public class PostKanbanWithProjectIdCommandImpl implements PostKanbanWithProject
         KanbanForm kanbanForm = KanbanForm.builder()
                 .kanbanId(UUID.randomUUID())
                 .name(request.getKanbanName())
+                .section(request.getKanbanSection())
                 .taskLists(new ArrayList<>())
                 .build();
         kanbanForms.add(kanbanForm);

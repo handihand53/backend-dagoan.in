@@ -73,6 +73,7 @@ public class PostCommentCommandImpl implements PostCommentCommand {
             commentForm.setCommentId(UUID.randomUUID());
             commentForm.setComment(request.getComment());
             commentForm.setUserId(request.getUserId());
+            commentForm.setUserName(request.getUserName());
             List<CommentForm> commentFormList = taskLists.getCommentForms();
             commentFormList.add(commentForm);
             taskLists.setCommentForms(commentFormList);

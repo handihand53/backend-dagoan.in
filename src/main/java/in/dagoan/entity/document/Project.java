@@ -1,5 +1,6 @@
 package in.dagoan.entity.document;
 
+import in.dagoan.entity.form.ChatForm;
 import in.dagoan.entity.form.MemberForm;
 import in.dagoan.entity.form.ProjectForm;
 import lombok.AllArgsConstructor;
@@ -24,6 +25,7 @@ public class Project {
     public static final String ID = "id";
     public static final String USER_ID = "userId";
     public static final String PROJECTS = "projects";
+    public static final String CHAT = "chat";
     public static final String CREATED_AT = "createdAt";
 
     @Id
@@ -35,6 +37,9 @@ public class Project {
 
     @Field(value = PROJECTS)
     private ProjectForm projects;
+
+    @Field(value = CHAT)
+    private List<ChatForm> chat;
 
     @Field(value = CREATED_AT)
     private LocalDateTime createdAt;

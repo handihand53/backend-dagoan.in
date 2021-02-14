@@ -34,7 +34,7 @@ public class MemberController {
         this.commandExecutor = commandExecutor;
     }
 
-    @GetMapping(value = ApiPath.MEMBER)
+    @PostMapping(value = ApiPath.MEMBER)
     public Mono<Response<GetListProjectWithUserIdResponse>> getMemberByProjectId(@RequestBody GetListProjectWithUserIdRequest request) {
         return commandExecutor.execute(GetListProjectByUserIdCommand.class, request)
                 .log("#postMember - Successfully executing command.")

@@ -15,5 +15,6 @@ import java.util.UUID;
 public class KanbanForm {
     private UUID kanbanId;
     private String name;
+    private int section;
     private List<TaskList> taskLists;
 }

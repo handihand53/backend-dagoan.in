@@ -21,4 +21,7 @@ public class PostKanbanWithProjectIdRequest {
 
     @NotNull
     private String kanbanName;
+
+    @NotNull
+    private int kanbanSection;
 }

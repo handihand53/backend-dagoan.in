@@ -15,24 +15,24 @@ import java.util.UUID;
 @Service
 public class FileUploadUtil {
     private String temp = "public/assets/resources/";
-    private String projectDir = "E:/blibli/final project/dagoan.in (FE)/" + temp;
+    private String projectDir = "E:/blibli/final project/dagoan.in (FE)/dagoan.in/" + temp;
     private String uploadDir = "uploads/";
 
     public List<String> uploadAllPhoto(List<MultipartFile> photos,
-                                       UUID productId,
+                                       UUID commentId,
                                        UploadEnum uploadEnum) throws IOException {
         List<String> imagePaths = new ArrayList<>();
         for (int i = 0; i < photos.size(); i++) {
-            imagePaths.add(uploadPhoto(photos.get(i), productId, uploadEnum, i));
+            imagePaths.add(uploadPhoto(photos.get(i), commentId, uploadEnum, i));
         }
         return imagePaths;
     }
 
     public String uploadPhoto(MultipartFile photo,
-                              UUID productId,
+                              UUID commentId,
                               UploadEnum uploadEnum,
                               Integer count) throws IOException {
-        String photoLink = projectDir + uploadDir + uploadEnum + "/" + productId + "_" + count + ".jpg";
+        String photoLink = projectDir + uploadDir + uploadEnum + "/" + commentId + "_" + count + ".jpg";
         File file = new File(photoLink);
         if (!file.exists()) {
             file.mkdirs();

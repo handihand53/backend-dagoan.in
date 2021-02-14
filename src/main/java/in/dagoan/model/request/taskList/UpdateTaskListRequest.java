@@ -40,6 +40,9 @@ public class UpdateTaskListRequest {
     @NotNull
     private Integer section;
 
+    @NotNull
+    private String description;
+
     private UUID tagId;
 
     private AssignTo assignTo;

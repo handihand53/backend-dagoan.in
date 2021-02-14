@@ -36,7 +36,7 @@ public class UpdateTaskListCommandImpl implements UpdateTaskListCommand {
 
     @Override
     public Mono<UpdateTaskListResponse> execute(UpdateTaskListRequest request) {
-        return kanbanRepository.findFirstByUserIdAndProjectId(request.getUserId(), request.getProjectId())
+        return kanbanRepository.findFirstByProjectId(request.getProjectId())
                 .switchIfEmpty(Mono.error(new NotFoundException("Kanban not found!")))
                 .map(kanban -> updateTaskList(kanban, request))
                 .flatMap(kanban -> kanbanRepository.save(kanban))

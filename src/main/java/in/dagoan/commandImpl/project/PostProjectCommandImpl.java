@@ -2,6 +2,7 @@ package in.dagoan.commandImpl.project;
 
 import in.dagoan.command.project.PostProjectCommand;
 import in.dagoan.entity.document.Project;
+import in.dagoan.entity.form.ChatForm;
 import in.dagoan.entity.form.ProjectForm;
 import in.dagoan.enums.ProjectStatus;
 import in.dagoan.model.request.project.PostProjectRequest;
@@ -52,9 +53,12 @@ public class PostProjectCommandImpl implements PostProjectCommand {
                 .createdAt(LocalDate.now())
                 .build();
 
+        List<ChatForm> chatForm = new ArrayList<>();
+
         Project project = Project.builder()
                 .projectId(UUID.randomUUID())
                 .userId(request.getUserId())
+                .chat(chatForm)
                 .projects(projectForm)
                 .createdAt(LocalDateTime.now())
                 .build();

@@ -13,5 +13,5 @@ import java.util.UUID;
 @NoArgsConstructor
 public class MemberForm {
     private UUID memberId;
-    private UUID userId;
+    private String userName;
 }

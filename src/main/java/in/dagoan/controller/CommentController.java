@@ -47,7 +47,7 @@ public class CommentController {
                 .subscribeOn(Schedulers.elastic());
     }
 
-    @DeleteMapping(value = ApiPath.COMMENT_DELETE)
+    @PutMapping(value = ApiPath.COMMENT_DELETE)
     public Mono<Response<DeleteCommentResponse>> putCommentByProjectId(@RequestBody DeleteCommentRequest request) {
         return commandExecutor.execute(DeleteCommentCommand.class, request)
                 .log("#DeleteComment - Successfully executing command.")

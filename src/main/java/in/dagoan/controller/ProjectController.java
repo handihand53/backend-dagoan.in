@@ -5,10 +5,7 @@ import com.blibli.oss.common.response.Response;
 import com.blibli.oss.common.response.ResponseHelper;
 import in.dagoan.ApiPath;
 import in.dagoan.command.project.*;
-import in.dagoan.model.request.project.DeleteProjectRequest;
-import in.dagoan.model.request.project.GetProjectWithUserIdAndProjectIdRequest;
-import in.dagoan.model.request.project.PostProjectRequest;
-import in.dagoan.model.request.project.UpdateProjectRequest;
+import in.dagoan.model.request.project.*;
 import in.dagoan.model.response.project.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +45,14 @@ public class ProjectController {
 //                .subscribeOn(Schedulers.elastic());
 //    }
 
+    @PostMapping(value = ApiPath.PROJECT_CHAT, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public Mono<Response<PostProjectChatResponse>> postNewProject(@RequestBody PostProjectChatRequest request) {
+        return commandExecutor.execute(PostProjectChatCommand.class, request)
+                .log("#postNewChat - Successfully executing command.")
+                .map(ResponseHelper::ok)
+                .subscribeOn(Schedulers.elastic());
+    }
+
     @PostMapping(value = ApiPath.PROJECT, consumes = MediaType.APPLICATION_JSON_VALUE)
     public Mono<Response<PostProjectResponse>> postNewProject(@RequestBody PostProjectRequest request) {
         return commandExecutor.execute(PostProjectCommand.class, request)
@@ -59,7 +64,23 @@ public class ProjectController {
     @PutMapping(value = ApiPath.PROJECT_UPDATE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public Mono<Response<UpdateProjectResponse>> updateProject(@RequestBody UpdateProjectRequest request) {
         return commandExecutor.execute(UpdateProjectCommand.class, request)
-                .log("#updateCartProductAmount - Successfully executing command.")
+                .log("#updateProject - Successfully executing command.")
+                .map(ResponseHelper::ok)
+                .subscribeOn(Schedulers.elastic());
+    }
+
+    @PutMapping(value = ApiPath.PROJECT_UPDATE_MEMBER, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public Mono<Response<UpdateProjectResponse>> updateProjectMember(@RequestBody UpdateProjectMemberRequest request) {
+        return commandExecutor.execute(UpdateProjectMemberCommand.class, request)
+                .log("#updateMember - Successfully executing command.")
+                .map(ResponseHelper::ok)
+                .subscribeOn(Schedulers.elastic());
+    }
+
+    @PutMapping(value = ApiPath.PROJECT_DELETE_MEMBER, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public Mono<Response<DeleteProjectMemberResponse>> deleteProjectMember(@RequestBody DeleteProjectMemberRequest request) {
+        return commandExecutor.execute(DeleteProjectMemberCommand.class, request)
+                .log("#deleteMember - Successfully executing command.")
                 .map(ResponseHelper::ok)
                 .subscribeOn(Schedulers.elastic());
     }
@@ -67,7 +88,7 @@ public class ProjectController {
     @DeleteMapping(value = ApiPath.PROJECT_DELETE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public Mono<Response<DeleteProjectResponse>> deleteProject(@RequestBody DeleteProjectRequest request) {
         return commandExecutor.execute(DeleteProjectCommand.class, request)
-                .log("#deleteCartProductAmount - Successfully executing command.")
+                .log("#deleteProject - Successfully executing command.")
                 .map(ResponseHelper::ok)
                 .subscribeOn(Schedulers.elastic());
     }
